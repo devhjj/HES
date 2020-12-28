@@ -16,5 +16,9 @@
 	<a href="member_index.do">회원관리로 이동</a>
 	<br>
 	<a href="shop_index.do">회원관리로 이동</a>
+	<br>
+	<a><a href="department.do">department</a></a>
+	<br>
+	<a><a href="doctor.do">doctor</a></a>
 </body>
 </html>
