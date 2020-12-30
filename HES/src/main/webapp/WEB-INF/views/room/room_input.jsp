@@ -13,3 +13,5 @@
 		<b>1일 입원비</b><input type="text" name="price" size="20">
 	</form>
 </div>
+
+
