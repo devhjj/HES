@@ -7,8 +7,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from hospital_room
 	</select>
 	
+	<select id="getRoom" resultType="roomDTO">
+		select * from hospital_room where roomNum=#{roomNum}
+	</select>
+	
 	<insert id="insertRoom" parameterType="roomDTO">
 		insert into hospital_room values
 		(hospital_room_num.nextval, #{roomName},#{price},#{accommodated_number})
 	</insert>
+	
+	<delete id="deleteRoom" parameterType="int">
+		delete from hospital_room where roomNum=#{roomNum}
+	</delete>
+	
+	<update id="updateRoom" parameterType="roomDTO">
+		update hospital_room set roomName=#{roomName}, price=#{price}, accommodated_number=#{accommodated_number}
+		where roomNum=#{roomNum}
+	</update>
 </mapper>

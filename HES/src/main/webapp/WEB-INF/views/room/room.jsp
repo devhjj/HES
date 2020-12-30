@@ -37,10 +37,10 @@
 			<c:forEach var="dto" items="${listRoom}">
 			<tbody>
 				<tr align="center">
-					<td>${dto.roomName }</td>
-					<td>${dto.accommodated_number }</td>
-					<td>${dto.doc_Major }</td>
-					<td>${dto.price }</td>
+					<td>${dto.roomName }호</td>
+					<td>${dto.accommodated_number}명</td>
+					<td>명</td>
+					<td>${dto.price }원</td>
 					<td><a href="room_update.do?roomNum=${dto.roomNum}">수정</a>|<a href="room_delete.do?roomNum=${dto.roomNum}">삭제</a></td>
 				</tr>
 			</tbody>

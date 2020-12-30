@@ -22,4 +22,19 @@ public class RoomMapper {
 		int res = sqlSession.insert("insertRoom",dto);
 		return res;
 	}
+	
+	public int deleteRoom(int roomNum) {
+		int res = sqlSession.delete("deleteRoom",roomNum);
+		return res;
+	}
+	
+	public RoomDTO getRoom(int roomNum) {
+		RoomDTO dto = sqlSession.selectOne("getRoom", roomNum);
+		return dto;
+	}
+	
+	public int updateRoom(RoomDTO dto) {
+		int res = sqlSession.update("updateRoom", dto);
+		return res;
+	}
 }

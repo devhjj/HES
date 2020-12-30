@@ -38,7 +38,7 @@
             <a class="nav-link" href="department.do">부서관리</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">병실관리</a>
+            <a class="nav-link" href="room.do">병실관리</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">입원관리</a>

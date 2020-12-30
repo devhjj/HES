@@ -2,6 +2,7 @@ package com.ezen709.myhome.model;
 
 public class RoomDTO {
 	private int roomNum; 
+	private String roomName;
 	private int price;
 	private int accommodated_number;
 	
@@ -10,6 +11,13 @@ public class RoomDTO {
 	}
 	public void setRoomNum(int roomNum) {
 		this.roomNum = roomNum;
+	}
+			
+	public String getRoomName() {
+		return roomName;
+	}
+	public void setRoomName(String roomName) {
+		this.roomName = roomName;
 	}
 	public int getPrice() {
 		return price;
