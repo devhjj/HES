@@ -14,11 +14,6 @@
 				<th colspan="2">부서입력</th>
 			</tr>
 			<tr>
-				<th>부서 코드</th>
-				<td><input type="number" name="dep_Code"></td>
-				
-			</tr>
-			<tr>
 				<th>부서 이름</th>
 				<td><input type="text" name="dep_Name"></td>
 			</tr>

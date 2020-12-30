@@ -25,10 +25,6 @@
 				<td><input type="text" name="doc_Name"></td>
 			</tr>
 			<tr>
-				<th>의사 코드</th>
-				<td><input type="number" name="doc_Code"></td>
-			</tr>
-			<tr>
 				<th>부서</th>
 				<td>
 				<select name="dep_Code">
