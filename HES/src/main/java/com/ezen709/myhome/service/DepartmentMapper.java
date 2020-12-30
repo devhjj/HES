@@ -24,13 +24,7 @@ public class DepartmentMapper {
 	}
 	
 	public int insertDepartment(DepartmentDTO dto) {
-		try {
-			sqlSession.insert("insertDepartment", dto);
-		} catch (Exception e) {
-			//코드중복시
-			return -1;
-		}
-		return 1;
+		return sqlSession.insert("insertDepartment", dto);
 	}
 	
 	public void deleteDepartment(int dep_Code) {

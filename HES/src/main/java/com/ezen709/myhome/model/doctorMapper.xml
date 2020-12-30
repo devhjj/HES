@@ -17,7 +17,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<insert id="insertDoctor" parameterType="doctorDTO">
-		insert into hospital_doctor values(#{doc_Code}, #{doc_Rank}, #{doc_Major}, #{resident_Num}, #{doc_Name}, #{dep_Code})
+		insert into hospital_doctor values(doc_seq.nextval, #{doc_Rank}, #{doc_Major}, #{resident_Num}, #{doc_Name}, #{dep_Code})
 	</insert>
 	
 	<delete id="deleteDoctor" parameterType="int">

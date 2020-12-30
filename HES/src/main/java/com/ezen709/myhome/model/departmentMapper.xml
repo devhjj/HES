@@ -13,7 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<insert id="insertDepartment" parameterType="departmentDTO">
-		insert into hospital_department values(#{dep_Code}, #{dep_Head}, #{dep_Name})
+		insert into hospital_department values(dep_seq.nextval, #{dep_Head}, #{dep_Name})
 	</insert>
 	
 	<delete id="deleteDepartment" parameterType="int">
