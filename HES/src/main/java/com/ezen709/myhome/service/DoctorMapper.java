@@ -29,12 +29,7 @@ public class DoctorMapper {
 	}
 	
 	public int insertDoctor(DoctorDTO dto) {
-		try {
-			return sqlSession.insert("insertDoctor", dto);
-		} catch (Exception e) {
-			//의사코드중복
-			return -1;
-		}
+		return sqlSession.insert("insertDoctor", dto);
 	}
 	
 	public int deleteDoctor(int doc_Code) {
