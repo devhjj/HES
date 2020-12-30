@@ -1,24 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="EUC-KR">
-<title>부서관리 페이지</title>
-</head>
-<body>
-<div align="center">
-<table width="50%" border="1">
-	<tr>
-		<th ><a href="">홈</a>|
-		<a href="department.do">부서관리</a>|
-		<a href="doctor.do">의사관리</a></th>
-	</tr>
-</table>
-</div>
-<br><br>
-<div align="center">
+<jsp:include page="../../views/common/header.jsp"></jsp:include>
+<div class="py-5" align="center">
 <form action="department.do" method="post">
 <table width="100" border="1" align="left">
 	<tr>
@@ -55,7 +39,7 @@
 	<c:choose>
 	<c:when test="${empty listDepartment }">
 	<tr>
-		<td colspan="3" align="center">생성된 부서가 없습니다.</td>
+		<td colspan="4" align="center">생성된 부서가 없습니다.</td>
 	</tr>		
 		</c:when>
 	<c:otherwise>
@@ -72,5 +56,4 @@
 </c:choose>
 </table>
 </div>
-</body>
-</html>
+<jsp:include page="../../views/common/footer.jsp"></jsp:include>

@@ -1,24 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
-</head>
-<body>
-	<h1>Spring으로 해보는 관리프로그램</h1>
+<jsp:include page="../views/common/header.jsp"></jsp:include>
+  <!-- Content section -->
+  <section class="py-5">
+    <div class="container">
+      <h1>HES 홈페이지</h1>
+      <p class="lead">ㅎㅇㅎㅇ</p>
+      <p>남은 기간 동안 열심히 프로젝트 해봅시다~</p>
+    </div>
+  </section>
+
+  <!-- Image element - set the background image for the header in the line below -->
+  <div class="py-5 bg-image-full" style="background-image: url('http://www.kumc.or.kr/img/KM_main_visual.jpg?image=1081');">
+    <!-- Put anything you want here! There is just a spacer below for demo purposes! -->
+    <div style="height: 200px;"></div>
+  </div>
 	
-	<a href="student_index.do">학생관리 프로그램으로 이동</a>
-	<br>
-	<a href="board_list.do">게시판으로 이동</a>
-	<br>
-	<a href="member_index.do">회원관리로 이동</a>
-	<br>
-	<a href="shop_index.do">회원관리로 이동</a>
-	<br>
-	<a><a href="department.do">department</a></a>
-	<br>
-	<a><a href="doctor.do">doctor</a></a>
-</body>
-</html>
+<jsp:include page="../views/common/footer.jsp"></jsp:include>
