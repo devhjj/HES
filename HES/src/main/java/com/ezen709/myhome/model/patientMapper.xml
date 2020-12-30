@@ -5,11 +5,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.ezen709.myhome.model.*">
 
 	<select id="listPatient" resultType="patientDTO">
-		select * from patient order by patient_Code
+		select * from hospital_patient order by patient_Code
 	</select>
 	
 	<insert id="insertPatient" parameterType="patientDTO">
-		insert into patient values(patient_seq.nextval, #{patient_call}, #{patient_name}, #{patient_Ssn}, #{patient_address}, #{patient_id}, #{patient_passwd})
+		insert into hospital_patient values(patient_seq.nextval, #{patient_call}, #{patient_name}, #{patient_Ssn}, #{patient_address}, #{patient_id}, #{patient_passwd})
 	</insert>
 		
 </mapper>
