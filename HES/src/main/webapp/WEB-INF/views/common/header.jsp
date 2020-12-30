@@ -29,7 +29,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">환자관리</a>
+            <a class="nav-link" href="patient.do">환자관리</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="doctor.do">의사관리</a>
