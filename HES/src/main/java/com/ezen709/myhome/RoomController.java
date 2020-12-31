@@ -41,8 +41,8 @@ public class RoomController {
 	}
 	
 	@RequestMapping("/room_delete.do")
-	public String deleteRoomPro(@RequestParam int roomNum) {
-		int res = roomMapper.deleteRoom(roomNum);
+	public String deleteRoom(@RequestParam int roomNum) {
+		roomMapper.deleteRoom(roomNum);
 		return "redirect:room.do";
 	}
 	
@@ -54,8 +54,11 @@ public class RoomController {
 	}
 	
 	@RequestMapping(value="/room_update.do", method=RequestMethod.POST)
-	public String UpdateRoomPro(@ModelAttribute RoomDTO dto) {
-		int res = roomMapper.updateRoom(dto);
+	public String UpdateRoomPro(@ModelAttribute RoomDTO dto,@RequestParam int currentAccommodated_number) {
+		int change =dto.getAccommodated_number() - currentAccommodated_number;
+		System.out.print(change);
+		roomMapper.changeAccommodatedNumNow(dto, change);
+		roomMapper.updateRoom(dto);
 		return "redirect:room.do";
 	}
 }

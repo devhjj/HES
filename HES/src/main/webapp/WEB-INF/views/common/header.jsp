@@ -24,7 +24,7 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#">진료관리
+            <a class="nav-link" href="treatment.do">진료관리
               <!-- <span class="sr-only">(current)</span> -->
             </a>
           </li>
@@ -41,7 +41,7 @@
             <a class="nav-link" href="room.do">병실관리</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">입원관리</a>
+            <a class="nav-link" href="hospitalization.do">입원관리</a>
           </li>
         </ul>
         <!-- Navbar-->

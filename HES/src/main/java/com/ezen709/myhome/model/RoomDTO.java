@@ -5,6 +5,7 @@ public class RoomDTO {
 	private String roomName;
 	private int price;
 	private int accommodated_number;
+	private int accommodated_number_now;
 	
 	public int getRoomNum() {
 		return roomNum;
@@ -30,6 +31,12 @@ public class RoomDTO {
 	}
 	public void setAccommodated_number(int accommodated_number) {
 		this.accommodated_number = accommodated_number;
+	}
+	public int getAccommodated_number_now() {
+		return accommodated_number_now;
+	}
+	public void setAccommodated_number_now(int accommodated_number_now) {
+		this.accommodated_number_now = accommodated_number_now;
 	} 
 	
 	

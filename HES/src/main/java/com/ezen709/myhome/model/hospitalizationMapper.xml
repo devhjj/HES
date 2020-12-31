@@ -3,4 +3,24 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ezen709.myhome.model.*">
+	<select id="listHospitalization" resultType="HospitalizationDTO">
+		select * from hospital_hospitalization order by roomName asc
+	</select>
+	
+	<select id="getHospitalization" resultType="HospitalizationDTO">
+		select * from hospital_hospitalization where hplCode = #{hplCode}
+	</select>
+	
+	<insert id="insertHospitalization" parameterType="HospitalizationDTO">
+		insert into hospital_hospitalization values
+		(hospital_hospitalization_num.nextval, #{patient_Name}, #{roomName},#{joinDate}, #{leaveDate})
+	</insert>
+	
+	<delete id="deleteHospitalization" parameterType="int">
+		delete from hospital_hospitalization where hplCode=#{hplCode}
+	</delete>
+	
+	<update id="updateHospitalization" parameterType="HospitalizationDTO">
+		update hospital_hospitalization set patient_Name=#{patient_Name}, roomName=#{roomName},joinDate=#{joinDate},leaveDate=#{leaveDate} where hplCode=#{hplCode}
+	</update>
 </mapper>
