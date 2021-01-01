@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hes.admin.mapper">
+
+	<select id="listDepartment" resultType="DepartmentDTO">
+		select * from hospital_department order by dep_Code
+	</select>
+	
+	<select id="filtering" parameterType="int" resultType="DepartmentDTO">
+		select * from hospital_department where dep_Code=#{filter}
+	</select>
+	
+	<insert id="insertDepartment" parameterType="DepartmentDTO">
+		insert into hospital_department values(dep_seq.nextval, #{dep_Head}, #{dep_Name})
+	</insert>
+	
+	<delete id="deleteDepartment" parameterType="int">
+		delete hospital_department where dep_Code=#{dep_Code}
+	</delete>
+	
+	<select id="getDepartment" parameterType="int" resultType="DepartmentDTO">
+		select * from hospital_department where dep_Code=#{dep_Code}
+	</select>
+	
+	<update id="updateDepartment" parameterType="DepartmentDTO">
+		update hospital_department set dep_Head=#{dep_Head}, dep_Name=#{dep_Name} where dep_Code=#{dep_Code}
+	</update>
+	
+	
+	
+</mapper>

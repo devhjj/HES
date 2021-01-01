@@ -21,7 +21,7 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<context:component-scan base-package="com.ezen709.myhome" />
+	<context:component-scan base-package="hes" />
 	
 	
 	

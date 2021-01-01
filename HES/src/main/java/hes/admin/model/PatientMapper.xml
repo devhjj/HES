@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hes.admin.mapper.*">
+
+	<select id="listPatient" resultType="patientDTO">
+		select * from hospital_patient order by patient_Code
+	</select>
+	
+	<insert id="insertPatient" parameterType="patientDTO">
+		insert into hospital_patient values(patient_seq.nextval, #{patient_call}, #{patient_name}, #{patient_Ssn}, #{patient_address}, #{patient_id}, #{patient_passwd})
+	</insert>
+		
+</mapper>

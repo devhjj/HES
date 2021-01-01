@@ -24,9 +24,9 @@
 		class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="typeAliasesPackage"
-			value="com.ezen709.myhome.model" />
+			value="hes.admin.model" />
 		<property name="mapperLocations"
-			value="classpath:com/ezen709/myhome/model/*.xml" />
+			value="classpath:hes/admin/model/*.xml" />
 	</bean>
 	<bean id="sqlSession"
 		class="org.mybatis.spring.SqlSessionTemplate">
