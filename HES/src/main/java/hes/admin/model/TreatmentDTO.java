@@ -2,10 +2,12 @@ package hes.admin.model;
 
 public class TreatmentDTO {
 	private int treatment_Code; 
-	private int doc_Code;
-	private int patient_Code; 
-	private String treatment_detail; 
-	private String treatment_date;
+	private String treatment_Date;
+	private String treatment_Time;
+	private String patient_Name;
+	private int dep_Code;
+	private String doc_Name;
+	private String treatment_Detail;
 	
 	public int getTreatment_Code() {
 		return treatment_Code;
@@ -13,30 +15,44 @@ public class TreatmentDTO {
 	public void setTreatment_Code(int treatment_Code) {
 		this.treatment_Code = treatment_Code;
 	}
-	public int getDoc_Code() {
-		return doc_Code;
+	public String getTreatment_Date() {
+		return treatment_Date;
 	}
-	public void setDoc_Code(int doc_Code) {
-		this.doc_Code = doc_Code;
+	public void setTreatment_Date(String treatment_Date) {
+		this.treatment_Date = treatment_Date;
 	}
-	public int getPatient_Code() {
-		return patient_Code;
+	public String getTreatment_Time() {
+		return treatment_Time;
 	}
-	public void setPatient_Code(int patient_Code) {
-		this.patient_Code = patient_Code;
+	public void setTreatment_Time(String treatment_Time) {
+		this.treatment_Time = treatment_Time;
 	}
-	public String getTreatment_detail() {
-		return treatment_detail;
+	public String getPatient_Name() {
+		return patient_Name;
 	}
-	public void setTreatment_detail(String treatment_detail) {
-		this.treatment_detail = treatment_detail;
+	public void setPatient_Name(String patient_Name) {
+		this.patient_Name = patient_Name;
 	}
-	public String getTreatment_date() {
-		return treatment_date;
+	public int getDep_Code() {
+		return dep_Code;
 	}
-	public void setTreatment_date(String treatment_date) {
-		this.treatment_date = treatment_date;
-	} 
+	public void setDep_Code(int dep_Code) {
+		this.dep_Code = dep_Code;
+	}
+	public String getDoc_Name() {
+		return doc_Name;
+	}
+	public void setDoc_Name(String doc_Name) {
+		this.doc_Name = doc_Name;
+	}
+	public String getTreatment_Detail() {
+		return treatment_Detail;
+	}
+	public void setTreatment_Detail(String treatment_Detail) {
+		this.treatment_Detail = treatment_Detail;
+	}
+	
+	
 	
 	
 }

@@ -3,4 +3,28 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="hes.admin.mapper.*">
+	<select id="listTreatment" resultType="TreatmentDTO">
+		select * from hospital_treatment order by treatment_date asc,  treatment_time asc
+	</select>
+	
+	<select id="searchTreatment" resultType="TreatmentDTO">
+		${sql}
+	</select>
+	
+	<select id="getTreatment" resultType="TreatmentDTO">
+		select * from hospital_treatment where treatment_Code = #{treatment_Code}
+	</select>
+	
+	<insert id="insertTreatment" parameterType="TreatmentDTO">
+		insert into hospital_treatment values 
+		(hospital_treatment_num.nextval, #{treatment_Date},#{treatment_Time},#{patient_Name},#{dep_Code},#{doc_Name},#{treatment_Detail})
+	</insert>
+	
+	<update id="updateTreatment" parameterType="TreatmentDTO">
+		update hospital_treatment set treatment_Date=#{treatment_Date},treatment_Time=#{treatment_Time}, dep_Code=#{dep_Code},doc_Name=#{doc_Name} where treatment_Code=#{treatment_Code}
+	</update>
+	
+	<delete id="deleteTreatment" parameterType="int">
+		delete from hospital_treatment where treatment_Code=#{treatment_Code}
+	</delete>
 </mapper>

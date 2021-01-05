@@ -24,29 +24,37 @@ public class HospitalizationController {
 	@Autowired
 	private RoomMapper roomMapper;
 			
-	@RequestMapping("/hospitalization.do")
-	public ModelAndView listHpl() {
+	@RequestMapping(value="/hospitalization.do", method=RequestMethod.GET)
+	public ModelAndView listHospitalization() {
 		List<HospitalizationDTO> listHospitalization = hospitalizationMapper.listHospitalization();
 		ModelAndView mav = new ModelAndView("hospitalization/hospitalization_list");
 		mav.addObject("listHospitalization", listHospitalization);
 		return mav;
 	}
 	
+	@RequestMapping(value="/hospitalization.do", method=RequestMethod.POST)
+	public ModelAndView searchHospitalization(@RequestParam String filter, @RequestParam String searchString) {
+		List<HospitalizationDTO> searchHospitalization = hospitalizationMapper.searchHospitalization(filter, searchString);
+		ModelAndView mav = new ModelAndView("hospitalization/hospitalization_list");
+		mav.addObject("searchHospitalization", searchHospitalization);
+		return mav;
+	}
+	
 	@RequestMapping(value="/hospitalization_input.do", method=RequestMethod.GET)
-	public ModelAndView insertHospitalization() {
+	public ModelAndView inputHospitalization() {
 		ModelAndView mav = new ModelAndView("hospitalization/hospitalization_input");
 		return mav;
 	}
 	
 	@RequestMapping(value="/hospitalization_input.do", method=RequestMethod.POST)
-	public String insertHospitalizationPro(@ModelAttribute HospitalizationDTO dto) {
+	public String inputHospitalizationPro(@ModelAttribute HospitalizationDTO dto) {
 		dto.setLeaveDate("");
 		hospitalizationMapper.insertHospitalization(dto);
-		roomMapper.minAccommodatedNumNow(dto.getRoomName()); //ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Î¿ï¿½ - 1
+		roomMapper.minAccommodatedNumNow(dto.getRoomName()); //¼ö¿ë°¡´ÉÀÎ¿ø - 1
 		return "redirect:hospitalization.do";
 	}
 	
-	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¸ï¿½ï¿½ ï¿½Ë¾ï¿½Ã¢
+	//º´½Ç Á¶È¸ ÆË¾÷Ã¢
 	@RequestMapping("/room_status.do")
 	public ModelAndView roomStatus() {
 		ModelAndView mav = new ModelAndView("hospitalization/room_status");
@@ -58,7 +66,7 @@ public class HospitalizationController {
 	@RequestMapping("/hospitalization_delete.do")
 	public String deleteHospitalization(@RequestParam int hplCode) {
 		HospitalizationDTO dto = hospitalizationMapper.getHospitalization(hplCode);
-		roomMapper.plusAccommodatedNumNow(dto.getRoomName()); //ï¿½Ô¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Î¿ï¿½ + 1
+		roomMapper.plusAccommodatedNumNow(dto.getRoomName()); //¼ö¿ë°¡´ÉÀÎ¿ø + 1
 		hospitalizationMapper.deleteHospitalization(hplCode); 
 		return "redirect:hospitalization.do";
 	}
@@ -76,8 +84,8 @@ public class HospitalizationController {
 			dto.setLeaveDate("");
 		}
 		hospitalizationMapper.updateHospitalization(dto);
-		roomMapper.plusAccommodatedNumNow(currentRoomName); //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Î¿ï¿½ + 1
-		roomMapper.minAccommodatedNumNow(dto.getRoomName()); //ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Î¿ï¿½ - 1
+		roomMapper.plusAccommodatedNumNow(currentRoomName); //ÇöÀçº´½Ç ¼ö¿ë°¡´ÉÀÎ¿ø + 1
+		roomMapper.minAccommodatedNumNow(dto.getRoomName()); //ÇöÀçº´½Ç ¼ö¿ë°¡´ÉÀÎ¿ø - 1
 		return "redirect:hospitalization.do";
 	}
 }

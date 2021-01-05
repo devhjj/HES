@@ -57,7 +57,7 @@ public class DepartmentController {
 		int res = departmentMapper.insertDepartment(dto);
 		if(res>0) {
 			System.out.println("����");
-			return "redirect:department_list.do";
+			return "redirect:department.do";
 		}else {
 			System.out.println("����");
 			return "department/department_input";
@@ -82,7 +82,7 @@ public class DepartmentController {
 		int res = departmentMapper.updateDepartment(dto);
 		if(res>0) {
 			System.out.println("����");
-			return "redirect:department_list.do";
+			return "redirect:department.do";
 		}else {
 			System.out.println("����");
 			return "department/department_update";

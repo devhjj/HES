@@ -47,9 +47,7 @@ public class RoomMapper {
 	}
 	
 	public int changeAccommodatedNumNow(RoomDTO dto, int change) {
-		System.out.print(change);
 		String sql = "update hospital_room set accommodated_number_now = accommodated_number_now +"+change+"where roomNum="+ dto.getRoomNum();
-		System.out.print(sql);
 		Map<String, String> map = new Hashtable<>();
 		map.put("sql",sql);
 		return sqlSession.update("changeAccommodatedNumNow",map);

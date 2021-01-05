@@ -11,10 +11,22 @@
 		</div>
 		<div class="card-body">
 		<div class="table-responsive">
+		<form name="f" action="" method="post">
 		<table class="table table-bordered dataTable" width="100%" border="1">
-		<tr>
-			<td align="right" colspan="6"><a href="hospitalization_input.do">입원 추가</a></td>
+		<tr align="center">
+			<td>
+			<select name="filter">
+				<option value="patient_Name">입원환자</option>
+			    <option value="roomName">입원병실</option>	
+			</select>
+			<input type="text" name="searchString">
+			<input type="submit" value="검색">
+			<input type="button" value="전체보기" onclick="window.location='hospitalization.do'">
+			</td>
 		</tr>
+		</table>
+		</form>
+		<table class="table table-bordered dataTable" width="100%" border="1">
 		<thead>
 		<tr>
 			<th>입원번호</th>
@@ -25,7 +37,25 @@
 			<th>비고</th>
 		</tr>
 		</thead>
+		<tr>
+			<td align="right" colspan="6"><a href="hospitalization_input.do">입원 추가</a></td>
+		</tr>
 		<c:choose>
+		<c:when test="${!empty searchHospitalization}">
+			<c:forEach var="dto" items="${searchHospitalization}">
+			<tbody>
+				<tr align="center">
+					<td>${dto.hplCode}</td>
+					<td>${dto.patient_Name}</td>
+					<td>${dto.roomName}호</td>
+					<td>${dto.joinDate}</td>
+					<td>${dto.leaveDate}</td>
+					<td><a href="hospitalization_update.do?hplCode=${dto.hplCode}">수정</a>|
+						   <a href="hospitalization_delete.do?hplCode=${dto.hplCode}">삭제</a></td>
+				</tr>
+			</tbody>
+			</c:forEach>
+		</c:when>
 		<c:when test="${empty listHospitalization}">
 			<tbody>
 			<tr>
@@ -48,7 +78,7 @@
 			</tbody>
 			</c:forEach>
 		</c:otherwise>
-	</c:choose>
+		</c:choose>
 		</table>
 		</div></div>
 	</div>
