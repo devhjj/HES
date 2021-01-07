@@ -4,10 +4,10 @@ public class PatientDTO {
 	private int patient_code;
 	private String patient_name;
 	private String patient_call;
-	private String patient_Ssn;
 	private String patient_address;
 	private String patient_id;
 	private String patient_passwd;
+	private String patient_email;
 	
 	public int getPatient_code() {
 		return patient_code;
@@ -27,12 +27,6 @@ public class PatientDTO {
 	public void setPatient_name(String patient_name) {
 		this.patient_name = patient_name;
 	}
-	public String getPatient_Ssn() {
-		return patient_Ssn;
-	}
-	public void setPatient_Ssn(String patient_Ssn) {
-		this.patient_Ssn = patient_Ssn;
-	}
 	public String getPatient_address() {
 		return patient_address;
 	}
@@ -51,6 +45,13 @@ public class PatientDTO {
 	public void setPatient_passwd(String patient_passwd) {
 		this.patient_passwd = patient_passwd;
 	}
+	public String getPatient_email() {
+		return patient_email;
+	}
+	public void setPatient_email(String patient_email) {
+		this.patient_email = patient_email;
+	}
+	
 
 	
 	

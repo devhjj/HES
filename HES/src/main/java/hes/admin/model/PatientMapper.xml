@@ -9,7 +9,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<insert id="insertPatient" parameterType="patientDTO">
-		insert into hospital_patient values(patient_seq.nextval, #{patient_call}, #{patient_name}, #{patient_Ssn}, #{patient_address}, #{patient_id}, #{patient_passwd})
+		insert into hospital_patient values(patient_seq.nextval, #{patient_call}, #{patient_name}, #{patient_address}, #{patient_id}, #{patient_passwd} ,#{patient_email})
 	</insert>
-		
+	
+	<update id="updatePatient" parameterType="patientDTO">
+		update hospital_patient set patient_passwd=#{patient_passwd}, patient_call=#{patient_call}, patient_address=#{patient_address}, patient_email=#{patient_email} where patient_code=#{patient_code}
+	</update>
+	
+	<select id="getPatient" parameterType="int" resultType="patientDTO">
+		select * from hospital_patient where patient_code=#{patient_code}
+	</select>
+	
+	<delete id="deletePatient" parameterType="int">
+		delete hospital_patient where patient_code=#{patient_code}
+	</delete>
+	
 </mapper>

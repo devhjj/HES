@@ -32,18 +32,19 @@
 		<div class="table-responsive">
 		<table class="table table-bordered dataTable" width="70%" border="1">
 		<thead>
-		<tr>
+		<tr align="center">
 			<th>환자코드</th>
 			<th>이름</th>
 			<th>전화번호</th>
 			<th>주소</th>
+			<th>비고</th>
 		</tr>
 		</thead>
 		<c:choose>
 		<c:when test="${empty listPatient }">
 		<tbody>
 		<tr>
-			<td colspan="4" align="center">입력된 환자가 없습니다.</td>
+			<td colspan="5" align="center">입력된 환자가 없습니다.</td>
 		</tr>
 		</tbody>		
 			</c:when>
@@ -55,8 +56,7 @@
 					<td>${dto.patient_name }</td>
 					<td>${dto.patient_call }</td>
 					<td>${dto.patient_address }</td>
-					<!-- 진료기록이랑 연결되는거 만들면 좋을듯 -->
-					<!-- 진료내용보기는 여기서 회원정보수정은 마이페이지로 -->
+					<td><a href="patient_update.do?patient_code=${dto.patient_code }">수정(마이페이지로 옮길예정)</a>|<a href="patient_delete.do?patient_code=${dto.patient_code }">삭제</a></td>
 				</tr>
 			</tbody>
 			</c:forEach>
