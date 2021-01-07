@@ -7,6 +7,8 @@
       <h1>HES 홈페이지</h1>
       <p class="lead">ㅎㅇㅎㅇ</p>
       <p>남은 기간 동안 열심히 프로젝트 해봅시다~</p>
+      <p> <a href="patient_input.do">회원가입 일단 여기에?</a></p>
+      <p> <a href="patient_login.do">로그인도 일단 여기에?</a></p>
     </div>
   </section>
 
