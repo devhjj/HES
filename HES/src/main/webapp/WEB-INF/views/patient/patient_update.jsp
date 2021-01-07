@@ -11,7 +11,7 @@
 			<tr>
 				<th>아이디</th>
 				<td><input type="text" name="patient_id" value="${dto.patient_id }" readonly></td>
-				<input type="hidden" name="patient_code" value="${dto.patient_code }">
+				
 			</tr>
 			<tr>
 				<th>비밀번호</th>
