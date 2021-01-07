@@ -4,7 +4,7 @@
 <jsp:include page="../../views/common/header.jsp"></jsp:include>
 <div class="py-5" align="center">
 	<form action="patient_input.do" method="post">
-		<table border="1">
+		<table class="table table-bordered dataTable" width="100%" border="1">
 			<tr align=center>
 				<th colspan="2">회원가입</th>
 			</tr>
