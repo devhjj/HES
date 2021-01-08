@@ -14,9 +14,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import hes.admin.model.DepartmentDTO;
 import hes.admin.model.DoctorDTO;
+import hes.admin.model.ReservationDTO;
 import hes.admin.model.TreatmentDTO;
 import hes.admin.service.DepartmentMapper;
 import hes.admin.service.DoctorMapper;
+import hes.admin.service.ReservationMapper;
 import hes.admin.service.TreatmentMapper;
 
 @Controller
@@ -30,6 +32,9 @@ public class TreatmentController {
 	
 	@Autowired
 	private DoctorMapper doctorMapper;
+	
+	@Autowired
+	private ReservationMapper reservationMapper;
 	
 	@RequestMapping(value="/treatment.do", method=RequestMethod.GET)
 	public ModelAndView listTreatment() {
@@ -71,10 +76,26 @@ public class TreatmentController {
 		return mav;
 	}
 	
+	//진료추가 -> 진료추가
 	@RequestMapping(value="/treatment_input.do", method=RequestMethod.POST)
 	public String insertTreatmentPro(@ModelAttribute TreatmentDTO dto) {
 		dto.setTreatment_Detail("");
 		treatmentMapper.insertTreatment(dto);
+		return "redirect:treatment.do";
+	}
+	
+	//예약상세 -> 예약승인
+	@RequestMapping(value="/treatment_input2.do", method=RequestMethod.POST)
+	public String insertTreatmentPro2(@ModelAttribute ReservationDTO dto) {
+		TreatmentDTO dto2 = new TreatmentDTO();
+		dto2.setPatient_Name(dto.getPatient_Name());
+		dto2.setTreatment_Date(dto.getTreatment_Date());
+		dto2.setTreatment_Time(dto.getTreatment_Time());
+		dto2.setDep_Code(dto.getDep_Code());
+		dto2.setDoc_Name(dto.getDoc_Name()); 
+		dto2.setTreatment_Detail("예약시 증상 및 요구사항 : \n" + dto.getReservation_Detail());
+		treatmentMapper.insertTreatment(dto2); 
+		reservationMapper.approveReservation(dto.getReservation_Code()); //예약진행상황 '예약승인' 으로 변경
 		return "redirect:treatment.do";
 	}
 	
@@ -99,11 +120,18 @@ public class TreatmentController {
 		//부서 의사 날짜 모두 선택시 해당 진료 검색 
 		if(dep_Code != null & doc_Name != null & treatment_Date != null) {
 			List<TreatmentDTO>searchTreatment = treatmentMapper.searchTreatment2(doc_Name, treatment_Date);
+			List<ReservationDTO>searchReservation = reservationMapper.searchReservation2(doc_Name, treatment_Date);
 			mav.addObject("treatment_Date", treatment_Date);
 			mav.addObject("doc_Name", doc_Name);
 			mav.addObject("dep_Code2",dep_Code);
 			mav.addObject("searchTreatment", searchTreatment);
+			mav.addObject("searchReservation", searchReservation);
 		}
+		
+		//예약에서 조회인지 진료에서 조회인지 구분하기
+		String mode = req.getParameter("mode");
+		mav.addObject("mode", mode);
+
 		mav.addObject("listDoctor", listDoctor);
 		mav.addObject("listDepartment", listDepartment);
 		return mav;

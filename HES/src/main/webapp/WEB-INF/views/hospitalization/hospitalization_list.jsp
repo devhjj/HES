@@ -4,7 +4,6 @@
 <jsp:include page="../../views/common/header.jsp"></jsp:include>
 <!--hosptialization.jsp-->
 <div class="py-5" align="center">
-<!-- 입원 환자 목록 -->
 <div class="card mb-4">
 		<div class="card-header">
 			입원 관리

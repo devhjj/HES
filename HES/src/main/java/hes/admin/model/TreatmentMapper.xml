@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="hes.admin.mapper.*">
 	<select id="listTreatment" resultType="TreatmentDTO">
-		select * from hospital_treatment order by treatment_date asc,  treatment_time asc
+		select * from hospital_treatment order by treatment_date desc,  treatment_time asc
 	</select>
 	
 	<select id="searchTreatment" resultType="TreatmentDTO">

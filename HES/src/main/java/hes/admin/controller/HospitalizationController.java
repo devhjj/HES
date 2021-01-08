@@ -54,15 +54,6 @@ public class HospitalizationController {
 		return "redirect:hospitalization.do";
 	}
 	
-	//병실 조회 팝업창
-	@RequestMapping("/room_status.do")
-	public ModelAndView roomStatus() {
-		ModelAndView mav = new ModelAndView("hospitalization/room_status");
-		List<RoomDTO> listRoom = roomMapper.listRoom();
-		mav.addObject("listRoom", listRoom);
-		return mav;
-	}
-	
 	@RequestMapping("/hospitalization_delete.do")
 	public String deleteHospitalization(@RequestParam int hplCode) {
 		HospitalizationDTO dto = hospitalizationMapper.getHospitalization(hplCode);

@@ -43,6 +43,12 @@
           <li class="nav-item">
             <a class="nav-link" href="hospitalization.do">입원관리</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="reservation_input.do">예약하기</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="reservation.do">예약관리</a>
+          </li>
         </ul>
         <!-- Navbar-->
         <ul class="navbar-nav ml-auto ml-md-0">

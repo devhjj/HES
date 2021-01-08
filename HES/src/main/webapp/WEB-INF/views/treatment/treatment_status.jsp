@@ -6,8 +6,8 @@
 <!-- treatment_staus.jsp -->
 <!-- 부서 선택시 해당 의사 호출 -->
 <script type="text/javascript">
-		function getDoc_Name(dep_Code){
-			window.location="treatment_status.do?dep_Code="+dep_Code;
+		function getDoc_Name(dep_Code,mode){
+			window.location="treatment_status.do?dep_Code="+dep_Code+"&mode="+mode;
 		}
 </script> 
 
@@ -26,23 +26,25 @@
 <div class="py-5" align="center">
 <div class="card mb-4">
 		<div class="card-header">
-			진료 조회
+			<c:if test="${mode == 'treatment'}">진료 조회</c:if>
+			<c:if test="${mode == 'reservation'}">예약 조회</c:if>
 		</div>
 	<div class="card-body">
 	<div class="table-responsive">
 		<form name="f" action="" method="post">
+		<input type="hidden" name="mode" value="${mode}">
 		<table class="table table-bordered dataTable"  border="1">
 		<tr align="center">
 			<th>진료부서</th>
 			<td>
-				<select name="dep_Code" onchange="getDoc_Name(this.value)">
+				<select name="dep_Code" onchange="getDoc_Name(this.value,'${mode}')">
 						<option value="0">전체</option>
 					<c:forEach var="dto" items="${listDepartment}">
 						<option value="${dto.dep_Code}" <c:if test="${dep_Code==dto.dep_Code}">selected</c:if>>${dto.dep_Name}</option>
 					</c:forEach>
 				</select>	
 			</td>
-			<th>진료의사</th>
+			<th>진료의사</th>	
 			<td>
 				<select name="doc_Name">
 					<c:forEach var="dto" items="${listDoctor}">
@@ -50,21 +52,22 @@
 					</c:forEach>	
 				</select>
 			</td>
-			<th>진료일자</th>
+			<c:if test="${mode == 'treatment'}"><th>진료일자</th></c:if>
+			<c:if test="${mode == 'reservation'}"><th>희망진료일자</th></c:if>
 			<td>
 				<input type="date" name="treatment_Date" value="${treatment_Date}">
 			</td>
-			<td><input type="submit" value="진료조회"></td>
+			<td><input type="submit" value="조회"></td>
 		</tr>
 		</table>
 		</form>
 		<table class="table table-bordered dataTable" width="100%" border="1">
 		<thead>
 		<tr>
-			<th>진료번호</th>
+			<c:if test="${mode == 'treatment'}"><th>진료번호</th></c:if>
 			<th>진료일자</th>
 			<th>진료시간</th>
-			<th>진료환자</th>
+			<c:if test="${mode == 'treatment'}"><th>진료환자</th></c:if>
 			<th>진료부서</th>
 			<th>진료의사</th>
 			<th>비고</th>
@@ -79,13 +82,13 @@
 		
 		<c:if test="${treatment_Date !=null}">
 		 <c:choose>
-		    <c:when test="${empty searchTreatment}">
+		    <c:when test="${empty searchTreatment && empty searchReservation}">
 		    <c:forTokens var="time" items="10:00,10:30,11:00,11:30,13:00,13:30,14:00,14:30,15:00,15:30,16:00,16:30,17:00,17:30" delims=",">
 	    	 <tr align="center">
-	    		<td></td>
+	    		<c:if test="${mode == 'treatment'}"><td></td></c:if>
 				<td>${treatment_Date}</td>
 				<td>${time}</td>
-				<td></td>
+				<c:if test="${mode == 'treatment'}"><td></td></c:if>
 				<td>${dep_Code2}</td>
 				<td>${doc_Name}</td>
 				<td><a href="javascript:setTreatment('${treatment_Date}','${time}','${dep_Code2}','${doc_Name}')">선택</a></td>
@@ -95,19 +98,27 @@
 		<c:otherwise>
 			<c:forTokens var="time" items="10:00,10:30,11:00,11:30,13:00,13:30,14:00,14:30,15:00,15:30,16:00,16:30,17:00,17:30" delims=",">
 			<tr align="center">
-				<td><c:forEach var="dto" items="${searchTreatment}"><c:if test="${dto.treatment_Time == time}">${dto.treatment_Code}</c:if></c:forEach></td>
+				<c:if test="${mode == 'treatment'}"><td><c:forEach var="dto" items="${searchTreatment}"><c:if test="${dto.treatment_Time == time}">${dto.treatment_Code}</c:if></c:forEach></td></c:if>
 				<td>${treatment_Date}</td>
 				<td>${time}</td>
-				<td><c:forEach var="dto" items="${searchTreatment}"><c:if test="${dto.treatment_Time == time}">${dto.patient_Name}</c:if></c:forEach></td>
+				<c:if test="${mode == 'treatment'}"><td><c:forEach var="dto" items="${searchTreatment}"><c:if test="${dto.treatment_Time == time}">${dto.patient_Name}</c:if></c:forEach></td></c:if>
 				<td>${dep_Code2}</td>
 				<td>${doc_Name}</td>
 				<td>
-				<c:set var="check" value="false"/>
+				<c:set var="checkTreatment" value="false"/>
+				<c:set var="checkReservation" value="false"/>
 				<c:forEach var="dto" items="${searchTreatment}">
-				<c:if test="${dto.treatment_Time == time}"><c:set var="check" value="true"/></c:if>
+				<c:if test="${dto.treatment_Time == time}"><c:set var="checkTreatment" value="true"/></c:if>
 				</c:forEach>
-				<c:if test="${check == true}">선택불가</c:if>
-				<c:if test="${check == false}"><a href="javascript:setTreatment('${treatment_Date}','${time}','${dep_Code2}','${doc_Name}')">선택</a></c:if>
+				<c:forEach var="dto" items="${searchReservation}">
+				<c:if test="${dto.treatment_Time == time}"><c:set var="checkReservation" value="true"/></c:if>
+				</c:forEach>
+				<c:choose>
+				<c:when test="${checkTreatment == true}">선택불가</c:when>
+				<c:when test="${checkReservation == true}"><c:if test="${mode == 'treatment'}">예약대기중</c:if>
+																				<c:if test="${mode == 'reservation'}">선택불가</c:if></c:when>
+				<c:otherwise><a href="javascript:setTreatment('${treatment_Date}','${time}','${dep_Code2}','${doc_Name}')">선택</a></c:otherwise>
+				</c:choose>
 				</td>
 			</tr>
 			</c:forTokens>

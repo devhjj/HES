@@ -58,4 +58,13 @@ public class RoomController {
 		roomMapper.updateRoom(dto);
 		return "redirect:room.do";
 	}
+	
+	//병실 조회 팝업창
+	@RequestMapping("/room_status.do")
+	public ModelAndView roomStatus() {
+		ModelAndView mav = new ModelAndView("room/room_status");
+		List<RoomDTO> listRoom = roomMapper.listRoom();
+		mav.addObject("listRoom", listRoom);
+		return mav;
+	}
 }
