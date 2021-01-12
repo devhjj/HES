@@ -24,7 +24,7 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#">의료진/진료과
+            <a class="nav-link" href="main_department.do">의료진/진료과
               <!-- <span class="sr-only">(current)</span> -->
             </a>
           </li>
