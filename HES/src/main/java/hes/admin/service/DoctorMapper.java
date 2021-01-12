@@ -1,6 +1,5 @@
 package hes.admin.service;
 
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -43,5 +42,13 @@ public class DoctorMapper {
 	public int updateDoctor(DoctorDTO dto) {
 		int res = sqlSession.update("updateDoctor", dto);
 		return res;
+	}
+	
+	public int getDepartmentCode(int doc_Code) {
+		return sqlSession.selectOne("getDepartmentCode", doc_Code);
+	}
+	
+	public String getImage(int doc_Code) {
+		return sqlSession.selectOne("getImage", doc_Code);
 	}
 }

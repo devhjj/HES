@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="hes.admin.mapper">
 
 	<select id="listDoctor" resultType="DoctorDTO">
-		select * from hospital_doctor order by dep_Code
+		select * from hospital_doctor order by dep_Code, doc_Code
 	</select>
 	
 	<select id="setDepartment" resultType="DepartmentDTO">
@@ -17,7 +17,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<insert id="insertDoctor" parameterType="DoctorDTO">
-		insert into hospital_doctor values(doc_seq.nextval, #{doc_Rank}, #{doc_Major}, #{resident_Num}, #{doc_Name}, #{dep_Code})
+		insert into hospital_doctor values(doc_seq.nextval, #{doc_Rank}, #{doc_Major}, #{doc_Name}, #{dep_Code}, #{doc_Email}, #{doc_Tel}, #{doc_License}, #{doc_Image}, #{doc_Coment}, #{doc_Thesis}, #{doc_FinalDegree}, #{doc_Career})
 	</insert>
 	
 	<delete id="deleteDoctor" parameterType="int">
@@ -29,7 +29,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<update id="updateDoctor" parameterType="DoctorDTO">
-		update hospital_doctor set doc_Rank=#{doc_Rank}, doc_Major=#{doc_Major}, resident_Num=#{resident_Num}, doc_Name=#{doc_Name}, dep_Code=#{dep_Code} where doc_Code=#{doc_Code}
+		update hospital_doctor set doc_Rank=#{doc_Rank}, doc_Major=#{doc_Major}, doc_Name=#{doc_Name}, dep_Code=#{dep_Code}, doc_Email=#{doc_Email}, doc_Tel=#{doc_Tel}, doc_Image=#{doc_Image}, doc_Coment=#{doc_Coment}, doc_Thesis=#{doc_Thesis}, doc_FinalDegree=#{doc_FinalDegree}, doc_Career=#{doc_Career} where doc_Code=#{doc_Code}
 	</update>
 	
+	<select id="getDepartmentCode" parameterType="int" resultType="int">
+		select dep_Code from hospital_doctor where doc_Code=#{doc_Code}
+	</select>
+	
+	<select id="getImage" parameterType="int" resultType="String">
+		select doc_Image from hospital_doctor where doc_Code=#{doc_Code}
+	</select>
 </mapper>

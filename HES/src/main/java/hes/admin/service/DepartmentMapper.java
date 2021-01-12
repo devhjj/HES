@@ -1,6 +1,5 @@
 package hes.admin.service;
 
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -40,5 +39,6 @@ public class DepartmentMapper {
 		int res = sqlSession.update("updateDepartment", dto);
 		return res;
 	}
+	
 	
 }
