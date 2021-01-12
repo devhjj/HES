@@ -10,6 +10,7 @@
       <p> <a href="patient_input.do">회원가입 일단 여기에?</a></p>
       <p> <a href="patient_login.do">로그인도 일단 여기에?</a></p>
       <p> <a href="user.do">사용자 페이지 일단 여기에?</a></p>
+      <p> <a href="main_department.do">이용자화면 부서보기</a></p>
     </div>
   </section>
 
