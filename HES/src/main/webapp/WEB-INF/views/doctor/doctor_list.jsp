@@ -32,7 +32,7 @@
 		<div class="table-responsive">
 		<table class="table table-bordered dataTable" width="70%" border="1">
 		<tr>
-			<td align="right" colspan="6"><a href="doctor_input.do">의사 추가</a></td>
+			<td align="right" colspan="9"><a href="doctor_input.do">의사 추가</a></td>
 		</tr>
 		<thead>
 		<tr>
@@ -41,6 +41,9 @@
 			<th>분야</th>
 			<th>직급</th>
 			<th>의사이름</th>
+			<th>이메일</th>
+			<th>전화번호</th>
+			<th>면허</th>
 			<th>비고</th>
 		</tr>
 		</thead>
@@ -60,7 +63,10 @@
 					<td>${dto.doc_Code }</td>
 					<td>${dto.doc_Major }</td>
 					<td>${dto.doc_Rank }</td>
-					<td><a href="doctor_info.do?doc_Code">${dto.doc_Name }</a></td>
+					<td><a href="doctor_view.do?doc_Code=${dto.doc_Code}">${dto.doc_Name }</a></td>
+					<td>${dto.doc_Email }</td>
+					<td>${dto.doc_Tel }</td>
+					<td>${dto.doc_License }</td>
 					<td><a href="doctor_update.do?doc_Code=${dto.doc_Code }">수정</a>|<a href="doctor_delete.do?doc_Code=${dto.doc_Code }">삭제</a></td>
 				</tr>
 			</tbody>
