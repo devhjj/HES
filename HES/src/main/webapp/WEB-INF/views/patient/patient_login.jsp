@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<jsp:include page="../../views/common/header.jsp"></jsp:include>
+<jsp:include page="../user/user_header.jsp"></jsp:include>
 <div class="py-5" align="center">
 	<form action ="login.do"  method ="post">
 		<table class="table table-bordered dataTable" width="100%" border="1">
