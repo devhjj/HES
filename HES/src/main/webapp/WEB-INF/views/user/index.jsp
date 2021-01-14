@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="user_header.jsp"></jsp:include>
 <!-- Content section -->
 <section class="py-5">
@@ -63,14 +64,27 @@
 					<br>
 					<table class="table table-bordered dataTable" width="100%"
 						border="1">
-						<tr>
-							<td><a href="#">산부인과</a></td>
-							<td><a href="#">내과</a></td>
-						</tr>
-						<tr>
-							<td><a href="#">소아과</a></td>
-							<td><a href="#">외과</a></td>
-						</tr>
+						<c:choose>
+							<c:when test="${empty department }">
+								<tr>
+									<td>입력된 부서가 없습니다.</td>
+								<tr>
+							</c:when>
+							<c:otherwise>
+								<c:set var="count" value="0"/>
+									<tr>
+								<c:forEach var="dp" items="${department }">
+									<td><a href="main_doctor.do?dep_Code=${dp.dep_Code }">${dp.dep_Name }</a></td>
+									<c:set var="count" value="${count+1 }"/>
+										<c:if test="${count%4==0 }">
+										</tr>
+										<tr>
+										</c:if>
+								</c:forEach>
+							</tr>	
+							</c:otherwise>
+						</c:choose>
+						
 						<hr color="green">
 					</table>
 				</div>
