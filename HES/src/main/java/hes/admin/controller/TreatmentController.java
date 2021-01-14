@@ -121,7 +121,7 @@ public class TreatmentController {
 		if(dep_Code != null & doc_Name != null & treatment_Date != null) {
 			List<TreatmentDTO>searchTreatment = treatmentMapper.searchTreatment2(doc_Name, treatment_Date);
 			List<ReservationDTO>searchReservation = reservationMapper.searchReservation2(doc_Name, treatment_Date);
-			mav.addObject("treatment_Date", treatment_Date);
+			
 			mav.addObject("doc_Name", doc_Name);
 			mav.addObject("dep_Code2",dep_Code);
 			mav.addObject("searchTreatment", searchTreatment);
@@ -131,7 +131,8 @@ public class TreatmentController {
 		//예약에서 조회인지 진료에서 조회인지 구분하기
 		String mode = req.getParameter("mode");
 		mav.addObject("mode", mode);
-
+		
+		mav.addObject("treatment_Date", treatment_Date);
 		mav.addObject("listDoctor", listDoctor);
 		mav.addObject("listDepartment", listDepartment);
 		return mav;
