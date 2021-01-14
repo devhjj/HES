@@ -1,4 +1,4 @@
-package hes.user.controller;
+package hes.admin.controller;
 
 import java.util.List;
 
@@ -15,14 +15,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 @Controller
-public class UserController {
+public class AdminController {
 
 	@Autowired
 	//private PatientMapper patientMapper;
 
-	@RequestMapping(value = "user.do", method = RequestMethod.GET)
+	@RequestMapping(value = "admin.do", method = RequestMethod.GET)
 	public String userIndex() {
-		return "user/index";
+		return "index";
 	}
 
 	
