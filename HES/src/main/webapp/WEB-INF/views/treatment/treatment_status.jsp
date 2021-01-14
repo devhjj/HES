@@ -7,8 +7,8 @@
 <!-- 부서 선택시 해당 의사 호출 -->
 <script type="text/javascript">
 		function getDoc_Name(dep_Code,mode){
-			window.location="treatment_status.do?dep_Code="+dep_Code+"&mode="+mode;
-		}
+			window.location="treatment_status.do?dep_Code="+dep_Code+"&mode="+mode+"&treatment_Date="+treatment_Date;
+		}	
 </script> 
 
 <!-- 최종 선택시 부모창으로 값 넘기기 -->
@@ -20,7 +20,7 @@
 			opener.document.getElementById("doc_Name").value = doc_Name; 
 			window.close();
 		}
-</script> 
+</script>
 
 <title>진료조회</title>
 <div class="py-5" align="center">
