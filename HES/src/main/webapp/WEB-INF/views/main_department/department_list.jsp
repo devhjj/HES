@@ -5,8 +5,9 @@
 <jsp:include page="../user/user_header.jsp"></jsp:include>
 <section class="py-5">
 <div align="center">
+<br>
+<br>
 	<table border="1">
-		
 		<tr>
 			<c:choose>
 			<c:when test="${empty listDepartment }">

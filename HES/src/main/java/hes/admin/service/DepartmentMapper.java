@@ -40,5 +40,8 @@ public class DepartmentMapper {
 		return res;
 	}
 	
+	public int getDep_Code(String search) {
+		return sqlSession.selectOne("getDep_Code", search);
+	}
 	
 }

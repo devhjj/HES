@@ -39,4 +39,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getImage" parameterType="int" resultType="String">
 		select doc_Image from hospital_doctor where doc_Code=#{doc_Code}
 	</select>
+	
+	<select id="searchDoctor" parameterType="String" resultType="DoctorDTO">
+		select * from hospital_doctor where doc_Name=#{search}
+	</select>
+	
+	<select id="searchDepartment" parameterType="int" resultType="DoctorDTO">
+		select * from hospital_doctor where dep_Code=#{dep_Code}
+	</select>
 </mapper>

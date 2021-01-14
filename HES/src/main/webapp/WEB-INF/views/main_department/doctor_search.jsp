@@ -5,7 +5,6 @@
 <jsp:include page="../user/user_header.jsp"></jsp:include>
 <section class="py-5">
 <div align="center">
-	<h2>${department.dep_Name } 의료진</h2><br><br>
 	<form action="search_doctor.do" method="get">
 		<select name="mode">
 			<option value="doc_Name">이름</option>
@@ -15,7 +14,7 @@
 		<button type="submit">검색</button>
 	</form>
 	<br><br><br>
-		<c:choose>
+	<c:choose>
 		<c:when test="${empty listDoctor }">
 			<h2>배정된 의료진이 없습니다.</h2>
 		</c:when>
@@ -24,7 +23,7 @@
 			<c:forEach var="dt" items="${listDoctor }">
 				<tr>
 					<th rowspan="3" width="300" height="300"><a href="main_view.do?doc_Code=${dt.doc_Code }"><img src="D:/springFile/${dt.doc_Image }" width="100%" height="100%"></a></th>
-					<td width="400">${department.dep_Name }</td>
+					<td width="400">${dt.dep_Code }</td>
 				</tr>
 				<tr>
 					<td>${dt.doc_Name }</td>
@@ -36,7 +35,7 @@
 			</c:forEach>
 		</table>
 		</c:otherwise>
-		</c:choose>
+	</c:choose>
 </div>
 </section>
 <jsp:include page="../../views/common/footer.jsp"></jsp:include>

@@ -2,6 +2,8 @@ package hes.admin.service;
 
 import java.util.List;
 
+import javax.swing.ListModel;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,5 +52,13 @@ public class DoctorMapper {
 	
 	public String getImage(int doc_Code) {
 		return sqlSession.selectOne("getImage", doc_Code);
+	}
+	
+	public List<DoctorDTO> searchDoctor(String search) {
+		return sqlSession.selectList("searchDoctor", search);
+	}
+	
+	public List<DoctorDTO> searchDepartment(int dep_Code){
+		return sqlSession.selectList("searchDepartment", dep_Code);
 	}
 }

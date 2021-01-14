@@ -28,6 +28,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update hospital_department set dep_Head=#{dep_Head}, dep_Name=#{dep_Name} where dep_Code=#{dep_Code}
 	</update>
 	
+	<select id="getDep_Code" parameterType="String" resultType="int">
+		select dep_Code from hospital_department where dep_Name=#{search}
+	</select>
 	
 	
 </mapper>

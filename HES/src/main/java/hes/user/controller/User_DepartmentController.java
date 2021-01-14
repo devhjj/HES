@@ -57,6 +57,28 @@ public class User_DepartmentController {
 		return mav;
 	}
 	
-	
+	@RequestMapping("search_doctor.do")
+	public ModelAndView searchDoctor(HttpServletRequest req) {
+		String mode = req.getParameter("mode");
+		String search = req.getParameter("search");
+		System.out.println("mode = "  + mode);
+		System.out.println("search = " + search);
+		ModelAndView mav = new ModelAndView("main_department/doctor_search");
+		List<DoctorDTO> listDoctor = doctorMapper.listDoctor();
+		List<DoctorDTO> listDoctor2;
+		if(mode==null) {
+			listDoctor = doctorMapper.listDoctor();
+		
+		}else if(mode.equals("doc_Name")) {
+			listDoctor = doctorMapper.searchDoctor(search);
+		}else if(mode.equals("dep_Name")) {
+			int dep_Code = departmentMapper.getDep_Code(search);
+			listDoctor = doctorMapper.searchDepartment(dep_Code);
+		}
+		mav.addObject("listDoctor", listDoctor);
+		//mav = new ModelAndView("main_department/doctor_search", "listDoctor", listDoctor);
+		
+		return mav;
+	}
 	
 }
