@@ -76,12 +76,21 @@ public class ReservationController {
 	}
 	
 	@RequestMapping(value="/reservation_input.do" ,method=RequestMethod.POST)
-	public String insertReservation(@ModelAttribute ReservationDTO dto, HttpServletRequest req) {
+	public ModelAndView insertReservation(@ModelAttribute ReservationDTO dto, HttpServletRequest req) {
 		if(req.getParameter("reservation_Detail") == null) {
 			dto.setReservation_Detail("");
 		}
-		reservationMapper.insertReservation(dto);
-		return "redirect:reservation.do";
+		ModelAndView mav = new ModelAndView("message");
+		int res = reservationMapper.insertReservation(dto);
+		String msg=null, url="/hes";
+		if(res>0) {
+			msg = "예약 접수가 완료되었습니다.";
+		}else {
+			msg = "예약 접수중 오류가 발생했습니다. 다시 시도해 주세요.";
+		}
+		mav.addObject("msg", msg);
+		mav.addObject("url", url);
+		return mav;
 	}
 	
 	@RequestMapping("/reservation_view.do")

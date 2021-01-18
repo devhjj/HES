@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:include page="../../views/common/header.jsp"></jsp:include>    
+<jsp:include page="../../views/user/user_header.jsp"></jsp:include>    
 <!-- treatment_input.jsp -->
 <!-- 유효성 검사 -->
 <script type="text/javascript">

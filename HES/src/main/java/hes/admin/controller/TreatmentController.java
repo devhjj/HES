@@ -78,10 +78,19 @@ public class TreatmentController {
 	
 	//진료추가 -> 진료추가
 	@RequestMapping(value="/treatment_input.do", method=RequestMethod.POST)
-	public String insertTreatmentPro(@ModelAttribute TreatmentDTO dto) {
+	public ModelAndView insertTreatmentPro(@ModelAttribute TreatmentDTO dto) {
 		dto.setTreatment_Detail("");
-		treatmentMapper.insertTreatment(dto);
-		return "redirect:treatment.do";
+		int res = treatmentMapper.insertTreatment(dto);
+		ModelAndView mav = new ModelAndView("message");
+		String msg=null, url="treatment.do";
+		if(res>0) {
+			msg = "진료 추가가 완료되었습니다.";
+		}else {
+			msg = "진료 추가중 오류가 발생했습니다. 다시 시도해 주세요.";
+		}
+		mav.addObject("msg", msg);
+		mav.addObject("url", url);
+		return mav;
 	}
 	
 	//예약상세 -> 예약승인
@@ -108,12 +117,13 @@ public class TreatmentController {
 		String dep_Code = req.getParameter("dep_Code");
 		String doc_Name = req.getParameter("doc_Name");
 		String treatment_Date = req.getParameter("treatment_Date");
-		
+	
 		//부서 선택시 해당 의사만 의사list에 담기
 		if(dep_Code != null) {
 			if(!dep_Code.equals("0")) {
 				listDoctor = doctorMapper.filtering(Integer.valueOf(req.getParameter("dep_Code")));
 			}
+			mav.addObject("listDoctor", listDoctor);
 			mav.addObject("dep_Code",dep_Code);
 		}
 		
@@ -133,7 +143,6 @@ public class TreatmentController {
 		mav.addObject("mode", mode);
 		
 		mav.addObject("treatment_Date", treatment_Date);
-		mav.addObject("listDoctor", listDoctor);
 		mav.addObject("listDepartment", listDepartment);
 		return mav;
 	}

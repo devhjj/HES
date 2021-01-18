@@ -4,11 +4,30 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/full-width-pics.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/bootstrap.min.css">
 <!-- treatment_staus.jsp -->
+<!-- 유효성검사 -->
+<script type="text/javascript">
+		function check(){
+			if (f.dep_Code.value=="0"){
+				alert("부서를 선택해 주세요.")
+				return
+			}
+			if (f.doc_Name.value==""){
+				alert("희망 진료의사를 선택해 주세요.")
+				return
+			}
+			if (f.treatment_Date.value==""){
+				alert("희망 진료일자를 선택해 주세요.")
+				return
+			}
+			document.f.submit()
+		}				
+</script>
+
 <!-- 부서 선택시 해당 의사 호출 -->
 <script type="text/javascript">
-		function getDoc_Name(dep_Code,mode){
-			window.location="treatment_status.do?dep_Code="+dep_Code+"&mode="+mode+"&treatment_Date="+treatment_Date;
-		}	
+	function getDoc_Name(dep_Code,mode,treatment_Date){
+		location.href="treatment_status.do?dep_Code="+dep_Code+"&mode="+mode+"&treatment_Date="+treatment_Date;
+	}	
 </script> 
 
 <!-- 최종 선택시 부모창으로 값 넘기기 -->
@@ -31,13 +50,13 @@
 		</div>
 	<div class="card-body">
 	<div class="table-responsive">
-		<form name="f" action="" method="post">
+		<form name="f" action="treatment_status.do" method="post">
 		<input type="hidden" name="mode" value="${mode}">
 		<table class="table table-bordered dataTable"  border="1">
 		<tr align="center">
 			<th>진료부서</th>
 			<td>
-				<select name="dep_Code" onchange="getDoc_Name(this.value,'${mode}')">
+				<select name="dep_Code" onchange="javascript:getDoc_Name(this.value,'${mode}',treatment_Date.value);">
 						<option value="0">전체</option>
 					<c:forEach var="dto" items="${listDepartment}">
 						<option value="${dto.dep_Code}" <c:if test="${dep_Code==dto.dep_Code}">selected</c:if>>${dto.dep_Name}</option>
@@ -54,10 +73,8 @@
 			</td>
 			<c:if test="${mode == 'treatment'}"><th>진료일자</th></c:if>
 			<c:if test="${mode == 'reservation'}"><th>희망진료일자</th></c:if>
-			<td>
-				<input type="date" name="treatment_Date" value="${treatment_Date}">
-			</td>
-			<td><input type="submit" value="조회"></td>
+			<td><input type="date" name="treatment_Date" value="${treatment_Date}"></td>
+			<td><input type="button" value="조회" onclick="check();"></td>
 		</tr>
 		</table>
 		</form>
@@ -80,7 +97,7 @@
 		 </tr>
 		</c:if>
 		
-		<c:if test="${treatment_Date !=null}">
+		<c:if test="${dep_Code!=null && doc_Name!=null && treatment_Date !=null}">
 		 <c:choose>
 		    <c:when test="${empty searchTreatment && empty searchReservation}">
 		    <c:forTokens var="time" items="10:00,10:30,11:00,11:30,13:00,13:30,14:00,14:30,15:00,15:30,16:00,16:30,17:00,17:30" delims=",">
