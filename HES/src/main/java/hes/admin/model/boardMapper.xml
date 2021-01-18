@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="hes.admin.mapper.*">
+<mapper namespace="hes.admin.mapper">
 <select id="listBoard" resultType="boardDTO" parameterType="java.util.Map">
 		select * from (select rownum rn, A.* from 
 		(select * from board order by re_step asc)A)

@@ -4,7 +4,7 @@
 <body>	
 <div align="center">
 	<b>±€ªË¡¶</b>
-	<form name="f" action="board_deletePro.do" method="post">
+	<form name="f" action="board_delete.do" method="post">
 		<input type="hidden" name="num" value="${param.num}"/>
 		<table class="table table-bordered dataTable" width="70%" border="1">
 		<thead>
