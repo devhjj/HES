@@ -1,33 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR" %>
 <!-- content.jsp -->
-<html>
-<head>
-	<link rel="stylesheet" type="text/css" href="style.css">
-	<title>글내용</title>
-</head>
-<body>
+<jsp:include page="../../views/user/user_header.jsp"/>
 <div align="center">
+<br><br><br>
 	<b>글내용 보기</b>
-	<table border="1" width="600">
-		<tr>
-			<th bgcolor="yellow" width="20%">글번호</th>
+	<table class="table table-bordered dataTable" width="70%" border="1">
+		<thead>
+		<tr align="center">
+			<th width="20%">글번호</th>
 			<td width="30%" align="center">${getBoard.num}</td>
-			<th bgcolor="yellow" width="20%">조회수</th>
+			<th width="20%">조회수</th>
 			<td width="30%" align="center">${getBoard.readcount}</td>
 		</tr>
 		<tr>
-			<th bgcolor="yellow" width="20%">작성자</th>
+			<th width="20%">작성자</th>
 			<td width="30%" align="center">${getBoard.writer}</td>
-			<th bgcolor="yellow" width="20%">작성일</th>
+			<th width="20%">작성일</th>
 			<td width="30%" align="center">${getBoard.reg_date}</td>
 		</tr>
 		<tr>
-			<th bgcolor="yellow" width="20%">글제목</th>
+			<th width="20%">글제목</th>
 			<td width="80%" align="center" colspan="3">${getBoard.subject}</td>
 		</tr>
 		<tr>
-			<th bgcolor="yellow" width="20%">글내용</th>
+			<th   width="20%">글내용</th>
 			<td width="80%" align="center" colspan="3">${getBoard.content}</td>
 		</tr>
 		<tr>
@@ -41,10 +38,9 @@
 		</tr>
 	</table>
 </div>
-</body>
-</html>
 
 
+<jsp:include page="../../views/common/footer.jsp"/>
 
 
 

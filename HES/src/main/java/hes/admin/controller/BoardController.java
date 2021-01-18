@@ -56,10 +56,9 @@ public class BoardController {
 		return "FileUpload";
 	}
 	
-	
+
 	@RequestMapping("/board_list.do")
-	public ModelAndView list(HttpServletRequest req) {
-	
+	public ModelAndView listBoard(HttpServletRequest req) {
 		String pageNum = req.getParameter("pageNum");
 		if (pageNum == null) {
 			pageNum = "1";
@@ -70,7 +69,7 @@ public class BoardController {
 		int endRow = pageSize * currentPage;
 		int count = boardMapper.getCount();
 		if (endRow>count) endRow = count;
-		List<BoardDTO> listBoard = boardMapper.listBoard(startRow, endRow);//boardDAO.listBoard(startRow, endRow);
+		List<BoardDTO> listBoard = boardMapper.listBoard(startRow, endRow);
 		int startNum = count - ((currentPage-1) * pageSize);
 		int pageBlock = 3;
 		int pageCount = count/pageSize + (count%pageSize == 0 ? 0 : 1);
@@ -89,26 +88,62 @@ public class BoardController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/board_write.do",method=RequestMethod.GET)
-	public String writeFrom() {
+	@RequestMapping(value="/board_write.do", method=RequestMethod.GET)
+	public String writeForm() {
 		return "board/writeForm";
 	}
-	@RequestMapping(value="/board_write.do",method=RequestMethod.POST)
-	public String writePro(HttpServletRequest req,@ModelAttribute BoardDTO dto, BindingResult result) {
-		if(result.hasErrors()) {
+	
+	@RequestMapping(value="/board_write.do", method=RequestMethod.POST)
+	public ModelAndView writePro(HttpServletRequest req, @ModelAttribute BoardDTO dto, BindingResult result) {
+		if (result.hasErrors()) {
 			dto.setNum(0);
-			dto.setRe_level(0);
 			dto.setRe_step(0);
+			dto.setRe_level(0);
 		}
 		dto.setIp(req.getRemoteAddr());
-		int res = boardMapper.insertBoard(dto);
-		return "redirect:board_list.do";
-	}
-	@RequestMapping("/board_content.do")
-	public ModelAndView content(@RequestParam int num) {
-		BoardDTO dto = boardMapper.getBoard(num, "content");
-		ModelAndView mav = new ModelAndView("board/content","getBoard",dto);
+		int res = boardMapper.insertBoard(dto);//boardDAO.insertBoard(dto);
+		String msg = null, url="board_list.do";
+		if(res>0) {
+			msg = "글 등록 완료";
+		}else {
+			msg = "글 등록 실패";
+		}
+		ModelAndView mav = new ModelAndView("message");
+		mav.addObject("msg",msg);
+		mav.addObject("url",url);
 		return mav;
 	}
 	
+	@RequestMapping("/board_content.do")
+	public ModelAndView content(@RequestParam int num) {
+		BoardDTO dto = boardMapper.getBoard(num, "content");
+		ModelAndView mav = new ModelAndView("board/content", "getBoard", dto);
+		return mav;
+	}
+	
+	@RequestMapping(value="/board_delete.do", method=RequestMethod.GET)
+	public String deleteForm() {
+		return "board/deleteForm";
+	}
+	
+	@RequestMapping(value="/board_delete.do", method=RequestMethod.POST)
+	public String deletePro(@RequestParam int num, @RequestParam String passwd) {
+		int res = boardMapper.deleteBoard(num, passwd);
+		return "redirect:board_list.do";
+	}
+	
+	@RequestMapping(value="/board_update.do", method=RequestMethod.GET)
+	public ModelAndView updateForm(@RequestParam int num) {
+		BoardDTO dto = boardMapper.getBoard(num, "update");
+		ModelAndView mav = new ModelAndView("board/updateForm", "getBoard", dto);
+		return mav;
+	}
+	
+	@RequestMapping(value="/board_update.do", method=RequestMethod.POST)
+	public String updatePro(BoardDTO dto) {
+		int res = boardMapper.updateBoard(dto);
+		return "redirect:board_list.do";
+	}
+	
 }
+

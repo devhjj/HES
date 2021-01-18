@@ -2,8 +2,8 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ezen709.myhome.model">
-	<select id="listBoard" resultType="boardDTO" parameterType="java.util.Map">
+<mapper namespace="hes.admin.mapper.*">
+<select id="listBoard" resultType="boardDTO" parameterType="java.util.Map">
 		select * from (select rownum rn, A.* from 
 		(select * from board order by re_step asc)A)
 		where rn between #{start} and #{end}
@@ -15,11 +15,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<update id="plusRe_step" parameterType="java.util.Map">
 		${sql}
-	</update>
-	
-	<update id="plusReadCount" parameterType="Integer">
-		update board set readcount = readcount+1 where num = #{num}
-	</update>  
+	</update> 
 	
 	<insert id="insertBoard" parameterType="boardDTO">
 		insert into board values (board_num.nextval, 
@@ -27,10 +23,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			#{content}, #{ip}, #{re_step}, #{re_level})
 	</insert>
 	
-	<select id="getBoard" resultType="boardDTO" parameterType="Integer">
-		select * from board where num = #{num}
-	</select>
-	
+	<update id="plusReadCount" parameterType="Integer">
+	 	update board set readcount=readcount+1 where num=#{num}
+	 </update>
+	 
+	 <select id="getBoard" resultType="BoardDTO" parameterType="int">
+	 	select * from board where num = #{num}
+	 </select>
+	 
+	 <delete id="deleteBoard" parameterType="Integer">
+	 	delete board where num = #{num}
+	 </delete>
+	 
+	 <update id="updateBoard" parameterType="boardDTO">
+	 	update board set writer=#{writer}, email=#{email}, subject=#{subject}, content=#{content} where num=#{num}
+	 </update>
 </mapper>
 
 

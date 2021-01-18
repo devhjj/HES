@@ -1,19 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR" %>
 <!-- updateForm.jsp -->
-<html>
-<head>
-<title>글수정</title>
-<link rel="stylesheet" type="text/css" href="../style.css">
-
-</head>
-<body>
+<jsp:include page="../../views/user/user_header.jsp"/>
 <div align="center">
 	<form name="f" action="board_updatePro.do" method="post"
 													onsubmit="return check()">
 		<b>글 수 정</b>
 		<input type="hidden" name="num" value="${getBoard.num}" />													
-		<table border="1" width="500">
+		<table class="table table-bordered dataTable" width="70%" border="1">
 			<tr>
 				<th width="20%" bgcolor="yellow">이름</th>
 				<td><input type="text" name="writer" class="box" value="${getBoard.writer}" required></td>
@@ -45,8 +39,8 @@
 	</form>
 </div>
 </body>
-</html>
 
+<jsp:include page="../../views/common/footer.jsp"/><body>
 
 
 

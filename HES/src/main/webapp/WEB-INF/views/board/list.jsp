@@ -5,11 +5,11 @@
 <jsp:include page="../../views/user/user_header.jsp"/>
 <div align="center">
 <br><br><br>
-	<b>공지사항 or 자주묻는질문</b>
+	<b>공지사항</b>
 	<table class="table table-bordered dataTable" width="70%" border="1">
 		<thead>
 		<tr align="center">
-			<td align="right"><a href="board_write.do">글쓰기</a></td>
+			<td align="right"><a href="board_write.do">(관리자라면)글쓰기</a></td>
 		</tr>
 	</table>
 <table class="table table-bordered dataTable" width="70%" border="1">

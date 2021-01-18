@@ -1,18 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<!-- deleteForm.jsp -->
-<html>
-<head>
-	<link rel="stylesheet" type="text/css" href="style.css">
-	<title>글삭제</title>
-</head>
+<jsp:include page="../../views/user/user_header.jsp"/>
 <body>	
 <div align="center">
 	<b>글삭제</b>
 	<form name="f" action="board_deletePro.do" method="post">
 		<input type="hidden" name="num" value="${param.num}"/>
-		<table border="1" width="300">
-			<tr bgcolor="yellow">
+		<table class="table table-bordered dataTable" width="70%" border="1">
+		<thead>
+		<tr align="center">
 				<th>비밀번호를 입력해 주세요</th>			
 			</tr>
 			<tr>
@@ -20,7 +16,7 @@
 					<input type="password" name="passwd" class="box">
 				</td>
 			</tr>
-			<tr bgcolor="yellow">
+			<tr align="center">
 				<td align="center">
 					<input type="submit" value="글삭제">
 					<input type="button" value="글목록" onclick="window.location='board_list.do'">
@@ -30,4 +26,5 @@
 	</form>
 </div>
 </body>
-</html>
+
+<jsp:include page="../../views/common/footer.jsp"/>
