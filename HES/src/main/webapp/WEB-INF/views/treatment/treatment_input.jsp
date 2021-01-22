@@ -15,7 +15,7 @@
 			<tbody>
 			<tr>
 				<th>진료환자</th>
-				<td><input type="text" id="patient_Name" name=patient_Name size="17">
+				<td><input type="text" id="patient_Name" name=patient_Name size="17" readonly>
 					   <input type="button" value="환자조회" onclick="window.open('patient_search.do','','width=1200,height=800')"></td>
 			</tr>
 			<tr>

@@ -12,7 +12,7 @@
 		<form name="f" action="hospitalization_input.do" method="post">
 		<table class="table table-bordered dataTable" border="1">
 		<tbody>
-			<tr><th>입원환자</th><td><input type="text" id="patient_Name" name="patient_Name" size="17">
+			<tr><th>입원환자</th><td><input type="text" id="patient_Name" name="patient_Name" size="17" readonly>
 												<input type="button" value="환자조회" onclick="window.open('patient_search.do','','width=1200,height=800')"></td>
 			<tr><th>입원병실</th><td><input type="text" id="roomName" name="roomName" size="17" readonly>호		
 										 		<input type="button" value="병실조회" onclick="window.open('room_status.do','','width=800,height=600')"></td></tr>
