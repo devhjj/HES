@@ -1,5 +1,6 @@
 package hes.admin.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -76,6 +77,19 @@ public class PatientController {
 	public String deletePatient(@RequestParam int patient_code) {
 		patientMapper.deletePatient(patient_code);
 		return "redirect:patient.do";
+	}
+	
+	@RequestMapping(value="patient_search.do", method=RequestMethod.GET)
+	public String searchPatient() {
+		return "patient/patient_search";
+	}
+	
+	@RequestMapping(value="patient_search.do", method=RequestMethod.POST)
+	public ModelAndView searchPatient(@RequestParam String patient_Name) {
+		List<PatientDTO> searchPatient = patientMapper.searchPatient(patient_Name);
+		ModelAndView mav = new ModelAndView("patient/patient_search");
+		mav.addObject("searchPatient", searchPatient);
+		return mav;
 	}
 
 

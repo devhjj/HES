@@ -20,6 +20,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from hospital_patient where patient_code=#{patient_code}
 	</select>
 	
+	<select id="searchPatient" parameterType="String" resultType="patientDTO">
+		select * from hospital_patient where patient_Name=#{patient_Name}
+	</select>
+	
 	<delete id="deletePatient" parameterType="int">
 		delete hospital_patient where patient_code=#{patient_code}
 	</delete>

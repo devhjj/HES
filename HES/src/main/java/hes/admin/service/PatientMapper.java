@@ -32,6 +32,10 @@ public class PatientMapper {
 		return sqlSession.selectOne("getPatient", patient_code);
 	}
 	
+	public List<PatientDTO> searchPatient(String patient_Name) {
+		return sqlSession.selectList("searchPatient", patient_Name);
+	}
+	
 	public int deletePatient(int patient_code) {
 		return sqlSession.delete("deletePatient", patient_code);
 	}
