@@ -4,9 +4,8 @@
   <!-- Content section -->
   <section class="py-5">
     <div class="container">
-      <h1>HES 홈페이지</h1>
-      <p class="lead">ㅎㅇㅎㅇ</p>
-      <p>남은 기간 동안 열심히 프로젝트 해봅시다~</p>
+      <h1>HES 관리자 페이지</h1>
+      <p class="lead"><a href="/">홈페이지 이동</a></p>
     </div>
   </section>
 

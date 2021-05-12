@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %> 
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,16 +20,18 @@
 <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="/hes"><img class="img-fluid d-block mx-auto" src="<%=request.getContextPath()%>/resources/img/hes_logo-rm.png" alt=""></a>
+      <a class="navbar-brand" href="/"><img class="img-fluid d-block mx-auto" src="<%=request.getContextPath()%>/resources/img/hes_logo-rm.png" alt=""></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
+          <sec:authorize access="hasRole('ROLE_ADMIN')">
           <li class="nav-item">
-          <li class="nav-item">
-            <a class="nav-link" href="admin.do">관리자페이지</a>
+            <a class="nav-link" href="admin">관리자페이지</a>
           </li>
+          </sec:authorize>
+          <li class="nav-item">
             <a class="nav-link" href="main_department.do">의료진/진료과
               <!-- <span class="sr-only">(current)</span> -->
             </a>
@@ -49,20 +54,28 @@
           <li class="nav-item">
             <a class="nav-link" href="#">병원소개</a>
           </li>
-        
+          <li class="nav-item">
+          	<sec:authorize access="isAnonymous()"> 
+        		<a class="btn btn-primary" href="<c:url value="/login" />">로그인</a> 
+			</sec:authorize> 
+		  </li>
         </ul>
+        <sec:authorize access="isAuthenticated()"> 
+        <form:form action="${pageContext.request.contextPath}/logout" method="POST" id="logout">
         <!-- Navbar-->
         <ul class="navbar-nav ml-auto ml-md-0">
         	<li class="nav-item dropdown">
             	<a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                 	<div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                        <a class="dropdown-item" href="patient_input.do">회원가입</a>
-                        <a class="dropdown-item" href="patient_login.do">Login</a>
+                        <a class="dropdown-item" href="#">개인정보</a>
+                        <a class="dropdown-item" href="#">예약확인</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="login.html">Logout</a>
+                        <a class="dropdown-item" onclick="document.getElementById('logout').submit()">로그아웃</a>
                     </div>
         	</li>
-        </ul>
+        </ul> 
+        </form:form> 
+        </sec:authorize>
       </div>
     </div>
   </nav>
