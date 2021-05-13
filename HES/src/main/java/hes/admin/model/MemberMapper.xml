@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hes.admin.mapper">
+
+	<select id="findUserByEmail" resultType="int">
+		SELECT * FROM HOSPITAL_PATIENT WHERE patient_email = #{patient_email};
+	</select>
+	
+	<select id="findByEmailAndAuth" parameterType="map" resultType="int">
+		/* findByEmailAndAuth */
+		SELECT 	count(*)
+		FROM 	HOSPITAL_PATIENT
+		WHERE	patient_email = #{patient_email}
+		AND		approval_key = #{approval_key}
+		AND		status = 'T'
+	</select>
+
+	<select id="createMember" parameterType="hes.common.MemberDTO"
+		resultType="int">
+		/* createMember */
+		INSERT ALL
+		INTO HOSPITAL_PATIENT values(PATIENT_CODE,PATIENT_ID,PATIENT_EMAIL,PATIENT_PASSWD,PATIENT_NAME,PATIENT_CALL,PATIENT_ADDRESS,enabled,apploval_key,status)
+		INTO AUTHORITY values(USERNAME,AUTHORITY_NAME)
+		SELECT 11 PATIENT_CODE
+		, #{patient_email} PATIENT_ID
+		, #{patient_email} PATIENT_EMAIL
+		, '' PATIENT_PASSWD
+		, '' PATIENT_NAME
+		, '' PATIENT_CALL
+		, '' PATIENT_ADDRESS
+		, 0 enabled
+		, '' apploval_key
+		, 'T' status
+		, #{patient_email} USERNAME
+		, '' AUTHORITY_NAME
+		FROM DUAL
+	</select>
+	
+	<update id="updateMemberStatus" parameterType="String">
+		/* updateMemberStatus */
+		UPDATE
+		(
+		SELECT 	a.AUTHORITY_NAME AS AUTHORITY_NAME,
+				b.status AS status
+		FROM 	AUTHORITY a, HOSPITAL_PATIENT b
+		WHERE 	b.patient_email = #{patient_email}
+		AND		a.USERNAME= b.patient_email
+		)
+		SET AUTHORITY_NAME = 'ROLE_USER'
+		, 	status = 'C'
+	</update>
+
+	<update id="updateEmailApproval" parameterType="map">
+		/* updateEmailApproval */
+		UPDATE HOSPITAL_PATIENT
+		SET approval_key = #{approvalKey}
+		WHERE patient_email = #{email}
+	</update>
+</mapper>

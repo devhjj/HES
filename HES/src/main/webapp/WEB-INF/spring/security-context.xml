@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:security="http://www.springframework.org/schema/security" 
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xsi:schemaLocation="http://www.springframework.org/schema/security 
+	http://www.springframework.org/schema/security/spring-security.xsd 
+	http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<security:http auto-config="true" use-expressions="true"> <!-- use-expressions은 ip와 같이 접근 권한 제한 -->
+		<security:csrf disabled="false" />
+		<security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
+		<security:intercept-url pattern="/user/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')"/>
+		<security:intercept-url pattern="/**" access="permitAll"/>
+		<security:form-login 
+		login-page="/login"
+		username-parameter="inputEmail" 
+		password-parameter="inputPassword" 
+		default-target-url="/"
+		authentication-failure-url="/login?fail=true"/>
+		<security:logout logout-success-url="/" />
+		<security:session-management invalid-session-url="/" session-fixation-protection="migrateSession"> <!-- 세션 고정 공격 방어 -->
+		<security:concurrency-control max-sessions="1" error-if-maximum-exceeded="true" expired-url="/login"/> <!-- 중복 로그인 방지 -->
+		</security:session-management>
+	</security:http>
+	
+	<security:authentication-manager alias="authenticationManager">  
+		<security:authentication-provider>
+			<security:password-encoder hash="bcrypt"/>
+			<security:jdbc-user-service data-source-ref="dataSource" id="userService"
+			users-by-username-query="SELECT PATIENT_EMAIL AS username, PATIENT_PASSWD AS password, ENABLED FROM HOSPITAL_PATIENT WHERE PATIENT_EMAIL=? AND ENABLED=1"
+			authorities-by-username-query="SELECT h.PATIENT_EMAIL AS username, a.AUTHORITY_NAME AS authority FROM HOSPITAL_PATIENT h, AUTHORITY a  WHERE a.USERNAME=h.PATIENT_EMAIL AND PATIENT_EMAIL=?"/>
+		</security:authentication-provider>
+		
+		<security:authentication-provider user-service-ref="userService">
+		</security:authentication-provider>
+	</security:authentication-manager> 
+	
+	<bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+	
+</beans>
